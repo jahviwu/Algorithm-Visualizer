@@ -16,5 +16,5 @@ $ cd algorithm-visualizer
 
 3. Install requirements.txt
 ```
-$ pip install requirements.txt
+$ pip install -r requirements.txt
 ```
