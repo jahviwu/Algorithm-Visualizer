@@ -2,6 +2,8 @@
 # 1. sorted - length of 1
 # 2. unsorted
 # compare val to immediate left and change positions
+import tkinter as tk
+from tkinter import ttk
 
 def insertion_sort(list_a):
     indexing_length = range(1, len(list_a))
@@ -15,16 +17,33 @@ def insertion_sort(list_a):
 
     return list_a
 
-def main():
-    user_input = input("Please enter an array with a space between each number:\n")
-    user_arr = user_input.split(" ")
-    
-    print("Sorting...\n")
-    result = insertion_sort(user_arr)
-    print(f"Sorted: {result}")
+class App(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Insertion Sort")
+        self.geometry("400x300")
 
-    # check if array conversion worked
-    # print(f"You entered: {user_arr}")
+        # input box
+        ttk.Label(self, text="Enter numbers seperated by a space:").pack(pady=5)
+        self.input_box = ttk.Entry(self, width=40)
+        self.input_box.pack(pady=5)
+
+        # sort button
+        ttk.Button(self, text="Sort", command=self.sort_array).pack(pady=10)
+
+        # output box
+        ttk.Label(self, text="Sorted Result: ").pack(pady=5)
+        self.output_box = tk.Text(self, height=5, width=40)
+        self.output_box.pack(pady=5)
+
+    def sort_array(self):
+        user_input = self.input_box.get()
+        user_arr = user_input.split()
+
+        result = insertion_sort(user_arr)
+        self.output_box.delete(1.0, tk.END)
+        self.output_box.insert(1.0, f"Sorted: {result}")
 
 if __name__ == "__main__":
-    main()
+    app = App()
+    app.mainloop()
